@@ -24,7 +24,7 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       if (data.hideOnScroll) {
-        if (scrollTop > lastScrollValue && scrollTop > 300) {
+        if (scrollTop > lastScrollValue && scrollTop > 200) {
           setScrollDown(true);
         } else if (scrollTop < lastScrollValue) {
           setScrollDown(false);
@@ -40,11 +40,12 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
   }, []);
 
   const classes = cn(
-    `sticky flex w-full top-0 justify-center md:px-12 transition-transform z-50`,
+    `sticky flex w-full top-0 justify-center md:px-12 transition-transform z-50 border-b border-foreground bg-background`,
 
     `${data.hideOnScroll && scrollDown ? "-translate-y-full md:-translate-y-full" : ""}`,
     { ...(theme ? { "data-theme": theme } : {}) },
   );
+
   return (
     <header className={classes} style={data.background ? { background: data.background } : {}}>
       <div
@@ -79,12 +80,19 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
           />
         </button>
         <nav
-          className={`absolute left-1/2 top-0 -z-10 flex origin-bottom transition-opacity duration-300 ${isMenuOpened ? "opacity-100" : "scale-y-0 opacity-0"} h-dvh w-screen -translate-x-1/2 flex-col items-start justify-between bg-white p-8 pb-16 md:p-12 lg:static lg:h-auto lg:w-fit lg:translate-x-0 lg:scale-100 lg:flex-row lg:bg-transparent lg:p-0 lg:opacity-100`}
+          className={`absolute left-1/2 top-0 -z-10 flex origin-bottom transition-opacity duration-300 ${isMenuOpened ? "opacity-100" : "scale-y-0 opacity-0"} z-10 h-dvh w-screen -translate-x-1/2 flex-col items-start justify-between bg-white p-8 pb-16 md:p-12 lg:relative lg:left-0 lg:h-auto lg:w-fit lg:translate-x-0 lg:scale-100 lg:flex-row lg:bg-transparent lg:p-0 lg:opacity-100`}
         >
           <div className="flex flex-col items-start gap-12 pt-24 lg:flex-row lg:pt-0">
             {data.navItems &&
               data.navItems.map(({ link }, i) => {
-                return <CMSLink key={i} {...link} appearance="link" className="text-black lg:text-white" />;
+                return (
+                  <CMSLink
+                    key={i}
+                    {...link}
+                    appearance="link"
+                    className="font-semibold text-background lg:text-base lg:text-foreground"
+                  />
+                );
               })}
           </div>
         </nav>

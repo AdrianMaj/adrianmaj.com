@@ -76,20 +76,20 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     ...plugins,
-    s3Storage({
-      collections: {
-        [Media.slug]: true,
-      },
-      bucket: process.env.S3_BUCKET || "",
-      config: {
-        endpoint: process.env.S3_ENDPOINT || "",
-        region: "auto",
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
-        },
-      },
-    }),
+    // s3Storage({
+    //   collections: {
+    //     [Media.slug]: true,
+    //   },
+    //   bucket: process.env.S3_BUCKET || "",
+    //   config: {
+    //     endpoint: process.env.S3_ENDPOINT || "",
+    //     region: "auto",
+    //     credentials: {
+    //       accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+    //       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+    //     },
+    //   },
+    // }),
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

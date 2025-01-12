@@ -1,7 +1,12 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "title": "Cześć, jestem Adrian!",
+    "subtitle": "Tworzę aplikacje webowe i dzielę się zdobytą wiedzą oraz własnymi przemyśleniami.",
+    "button": "Sprawdź blog",
+    "portfolio-button": "Zobacz portfolio"
+  },
+  "ThemedImage": {
+    "alt": "Snippet kodu"
   },
   "LocaleSwitch": {
     "label": "Wybierz język",
