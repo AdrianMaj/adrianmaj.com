@@ -29,6 +29,8 @@ export const Card = (props: {
   const sanitizedDescription = description?.replace(/\s/g, " "); // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`;
 
+  console.log(doc);
+
   return (
     <article
       className={cn(

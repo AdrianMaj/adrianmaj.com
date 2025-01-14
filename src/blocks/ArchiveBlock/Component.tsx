@@ -5,6 +5,8 @@ import { getPayload } from "payload";
 import RichText from "@/components/RichText";
 
 import { CollectionArchive } from "@/components/CollectionArchive";
+import { getLocale } from "next-intl/server";
+import { Locale } from "@/i18n/config";
 
 export const ArchiveBlock = async (
   props: ArchiveBlockProps & {
@@ -17,6 +19,8 @@ export const ArchiveBlock = async (
 
   let posts: Post[] = [];
 
+  const locale = (await getLocale()) as Locale;
+
   if (populateBy === "collection") {
     const payload = await getPayload({ config });
 
@@ -28,6 +32,7 @@ export const ArchiveBlock = async (
     const fetchedPosts = await payload.find({
       collection: "posts",
       depth: 1,
+      locale,
       limit,
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {

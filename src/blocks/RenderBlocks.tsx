@@ -14,7 +14,7 @@ const blockComponents = {
   content: ContentBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
-  // code: CodeBlock,
+  code: CodeBlock,
   carousel: CarouselBlock,
   mediaBlock: MediaBlock,
   accordion: AccordionBlock,

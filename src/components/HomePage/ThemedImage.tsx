@@ -1,12 +1,10 @@
 "use client";
 import { useTheme } from "@/providers/Theme";
-import { Theme } from "@/providers/Theme/types";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 export const ThemedImage = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   const t = useTranslations("ThemedImage");
 

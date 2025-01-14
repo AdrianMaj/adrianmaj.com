@@ -22,6 +22,12 @@ export const Footer: GlobalConfig = {
         link({
           appearances: false,
         }),
+        {
+          name: "icon",
+          type: "upload",
+          relationTo: "media",
+          label: "Icon",
+        },
       ],
       maxRows: 6,
       admin: {

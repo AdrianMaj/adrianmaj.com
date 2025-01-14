@@ -1,8 +1,9 @@
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { cn } from "src/utilities/cn";
 import { Link } from "@/i18n/routing";
+import Image from "next/image";
 
-import type { Page, Post } from "@/payload-types";
+import type { Media, Page, Post } from "@/payload-types";
 
 type CMSLinkType = {
   appearance?: "inline" | ButtonProps["variant"];
@@ -15,6 +16,7 @@ type CMSLinkType = {
     value: Page | Post | string | number;
   } | null;
   size?: ButtonProps["size"] | null;
+  icon?: Media | null;
   type?: "custom" | "reference" | null;
   url?: string | null;
 };
@@ -25,6 +27,7 @@ export const CMSLink = (props: CMSLinkType) => {
     appearance = "inline",
     children,
     className,
+    icon,
     label,
     newTab,
     reference,
@@ -46,6 +49,15 @@ export const CMSLink = (props: CMSLinkType) => {
   if (appearance === "inline") {
     return (
       <Link className={cn(className)} href={href || url || ""} {...newTabProps}>
+        {icon && icon.url && (
+          <Image
+            alt={icon.alt}
+            src={icon.url}
+            width={icon.width ?? 36}
+            height={icon.height ?? 36}
+            className="invert"
+          />
+        )}
         {label && label}
         {children && children}
       </Link>
@@ -55,6 +67,15 @@ export const CMSLink = (props: CMSLinkType) => {
   return (
     <Button asChild className={className} size={size} variant={appearance}>
       <Link className={cn(className)} href={href || url || ""} {...newTabProps}>
+        {icon && icon.url && (
+          <Image
+            alt={icon.alt}
+            src={icon.url}
+            width={icon.width ?? 36}
+            height={icon.height ?? 36}
+            className="invert"
+          />
+        )}
         {label && label}
         {children && children}
       </Link>

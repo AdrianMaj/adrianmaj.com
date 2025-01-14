@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { CMSLink } from "@/components/Link";
 import { useEffect, useState } from "react";
+import { ThemeSelector } from "@/providers/Theme/ThemeSelector";
+import LocaleSwitch from "@/components/LocaleSwitch/LocaleSwitch";
 
 export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | null }) => {
   const [isMenuOpened, setisMenuOpened] = useState(false);
@@ -94,6 +96,10 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
                   />
                 );
               })}
+            <div className="flex gap-6">
+              <ThemeSelector />
+              <LocaleSwitch />
+            </div>
           </div>
         </nav>
         <CMSLink className="ml-auto hidden md:flex" />
