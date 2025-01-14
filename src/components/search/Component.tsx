@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
 import { useDebounce } from "@/utilities/useDebounce";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export const Search = () => {
   const [value, setValue] = useState("");
@@ -15,6 +16,8 @@ export const Search = () => {
     router.push(`/search${debouncedValue ? `?q=${debouncedValue}` : ""}`);
   }, [debouncedValue, router]);
 
+  const t = useTranslations("SearchPage");
+
   return (
     <div>
       <form
@@ -23,17 +26,17 @@ export const Search = () => {
         }}
       >
         <Label htmlFor="search" className="sr-only">
-          Search
+          {t("input-placeholder")}
         </Label>
         <Input
           id="search"
           onChange={(event) => {
             setValue(event.target.value);
           }}
-          placeholder="Search"
+          placeholder={t("input-placeholder")}
         />
         <button type="submit" className="sr-only">
-          submit
+          {t("search-button")}
         </button>
       </form>
     </div>

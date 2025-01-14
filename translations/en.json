@@ -11,5 +11,11 @@
   "LocaleSwitch": {
     "label": "Change language",
     "locale": "{locale, select, pl {Polish} en {English} other {Unknown}}"
+  },
+  "SearchPage": {
+    "title": "Search for posts",
+    "not-found": "No results found",
+    "input-placeholder": "Enter search phrase",
+    "search-button": "Search"
   }
 }

@@ -7,7 +7,7 @@ import React from "react";
 import { Search } from "@/components/search/Component";
 import PageClient from "./page.client";
 import { CardPostData } from "@/components/Card";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Locale } from "@/i18n/config";
 
 type Args = {
@@ -19,6 +19,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   const { q: query } = await searchParamsPromise;
   const payload = await getPayload({ config });
   const locale = (await getLocale()) as Locale;
+  const t = await getTranslations("SearchPage");
 
   const posts = await payload.find({
     collection: "search",
@@ -68,7 +69,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       <PageClient />
       <div className="container mb-16">
         <div className="prose max-w-none text-center dark:prose-invert">
-          <h1 className="mb-8 lg:mb-16">Search</h1>
+          <h1 className="mb-8 lg:mb-16">{t("title")}</h1>
 
           <div className="mx-auto max-w-[50rem]">
             <Search />
@@ -79,7 +80,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as CardPostData[]} />
       ) : (
-        <div className="container">No results found.</div>
+        <div className="container">{t("not-found")}</div>
       )}
     </div>
   );
