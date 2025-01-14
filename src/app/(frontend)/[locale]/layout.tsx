@@ -46,27 +46,31 @@ export default async function RootLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable, "twp")} lang="en" suppressHydrationWarning>
+    <html
+      className={cn(GeistSans.variable, GeistMono.variable, "twp")}
+      lang={locale}
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body className="max-w-screen overflow-x-clip lg:overflow-y-auto">
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
-            <AdminBar
+        <Providers>
+          <NextIntlClientProvider messages={messages}>
+            {/* <AdminBar
               adminBarProps={{
                 preview: isEnabled,
               }}
-            />
+            /> */}
             <LivePreviewListener />
 
             <Header />
             {children}
             <Footer />
-          </Providers>
-        </NextIntlClientProvider>
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

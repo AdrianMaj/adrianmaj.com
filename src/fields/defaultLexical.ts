@@ -1,12 +1,12 @@
 import { Config } from "payload";
 import { LinkFeature, lexicalEditor, BlocksFeature } from "@payloadcms/richtext-lexical";
-import {
-  BgColorFeature,
-  HighlightColorFeature,
-  TextColorFeature,
-  YoutubeFeature,
-  VimeoFeature,
-} from "payloadcms-lexical-ext";
+// import {
+//   BgColorFeature,
+//   HighlightColorFeature,
+//   TextColorFeature,
+//   YoutubeFeature,
+//   VimeoFeature,
+// } from "payloadcms-lexical-ext";
 import { Carousel } from "@/blocks/Carousel/config";
 
 export const defaultLexical: Config["editor"] = lexicalEditor({

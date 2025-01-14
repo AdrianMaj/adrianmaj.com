@@ -18,7 +18,7 @@ import { BannerBlock } from "@/blocks/Banner/Component";
 import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { cn } from "@/utilities/cn";
 
-import { JSXConverters } from "payloadcms-lexical-ext";
+// import { JSXConverters } from "payloadcms-lexical-ext";
 import { CarouselBlock } from "@/blocks/Carousel/Component";
 
 type NodeTypes =

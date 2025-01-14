@@ -51,6 +51,7 @@ export const AdminBar = (props: { adminBarProps?: PayloadAdminBarProps }) => {
     >
       <div className="container">
         <PayloadAdminBar
+          apiPath="/api/administrators"
           {...adminBarProps}
           className="py-2 text-white"
           classNames={{

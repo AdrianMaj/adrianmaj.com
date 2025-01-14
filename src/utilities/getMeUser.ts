@@ -15,6 +15,8 @@ export const getMeUser = async (args?: {
   const cookieStore = await cookies();
   const token = cookieStore.get("payload-token")?.value;
 
+  console.log();
+
   const meUserReq = await fetch(`${getClientSideURL()}/api/administrators/me`, {
     headers: {
       Authorization: `JWT ${token}`,

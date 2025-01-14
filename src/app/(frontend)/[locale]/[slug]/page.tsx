@@ -50,6 +50,7 @@ type Args = {
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode();
   const { slug = "home", locale } = await paramsPromise;
+
   const url = `/${locale}/${slug}`;
 
   let page: PageType | null;
@@ -69,7 +70,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     <article className="pb-24 pt-16">
       <PageClient />
       {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound locale={locale} url={url} />
+      {!page && slug !== "home" && <PayloadRedirects disableNotFound locale={locale} url={url} />}
 
       {draft && <LivePreviewListener />}
 
