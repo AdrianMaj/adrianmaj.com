@@ -129,7 +129,7 @@ export const FormBlock = (
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
-      <div className="rounded-[0.8rem] border border-border p-4 lg:p-6">
+      <div className="rounded-[0.8rem] border border-border bg-card p-4 lg:p-6">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === "message" && (
             <RichText data={confirmationMessage} />

@@ -18,6 +18,8 @@ export const ThemedImage = () => {
       width="948"
       className="min-h-80 w-full object-cover object-left"
       height="517"
+      priority={true}
+      loading="eager"
       alt={t("alt")}
     />
   ) : (
@@ -25,6 +27,8 @@ export const ThemedImage = () => {
       src="/api/media/file/welcome-dark.jpg"
       width="948"
       height="517"
+      priority={true}
+      loading="eager"
       className="min-h-80 w-full object-cover object-left"
       alt={t("alt")}
     />
