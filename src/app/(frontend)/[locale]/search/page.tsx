@@ -90,5 +90,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("SearchPage");
   return {
     title: t("meta-title"),
+    description: t("meta-description"),
   };
 }

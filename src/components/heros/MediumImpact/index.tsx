@@ -31,7 +31,7 @@ export const MediumImpactHero = ({ links, media, richText, reversed }: Page["her
       <div className="container">
         {media && typeof media === "object" && (
           <div>
-            <Media imgClassName="" priority resource={media} />
+            <Media imgClassName="" priority loading="eager" resource={media} />
             {media?.caption && (
               <div className="mt-3">
                 <RichText data={media.caption} enableGutter={false} />

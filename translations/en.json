@@ -17,7 +17,8 @@
     "not-found": "No results found",
     "input-placeholder": "Enter search phrase",
     "search-button": "Search",
-    "meta-title": "Posts search | adrianmaj.com"
+    "meta-title": "Posts search | adrianmaj.com",
+    "meta-description": "Search for posts on adrianmaj.com blog. Enter search phrase and check the results."
   },
   "ThemeSelector": {
     "label": "Select a theme"
