@@ -7,6 +7,7 @@ import { Locale } from "@/i18n/config";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { LanguagesIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   children: ReactNode;
@@ -19,6 +20,7 @@ export function LocaleSwitchSelect({ children, defaultValue, label }: Props) {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
+  const t = useTranslations("LocaleSwitch");
 
   function onSelectChange(locale: Locale) {
     startTransition(() => {
@@ -35,7 +37,10 @@ export function LocaleSwitchSelect({ children, defaultValue, label }: Props) {
   return (
     <>
       <Select value={defaultValue} disabled={isPending} onValueChange={onSelectChange}>
-        <SelectTrigger className="-mx-3 -my-2 w-auto gap-2 border-none bg-transparent pl-0 md:pl-3">
+        <SelectTrigger
+          aria-label={t("label")}
+          className="w-auto gap-2 border-none bg-transparent pl-3 lg:-mx-3 lg:-my-2"
+        >
           <LanguagesIcon width={28} height={28} strokeWidth={1.5} />
         </SelectTrigger>
         <SelectContent align="end">{children}</SelectContent>

@@ -8,6 +8,7 @@ import type { Theme } from "./types";
 import { useTheme } from "..";
 import { themeLocalStorageKey } from "./types";
 import { MoonIcon, SunIcon, SunMoonIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export const ThemeSelector = () => {
   const { setTheme, theme } = useTheme();
@@ -28,11 +29,13 @@ export const ThemeSelector = () => {
     setValue(preference ?? "auto");
   }, []);
 
+  const t = useTranslations("ThemeSelector");
+
   return (
     <Select onValueChange={onThemeChange} value={value}>
       <SelectTrigger
-        aria-label="Select a theme"
-        className="-mx-3 -my-2 w-auto gap-2 border-none bg-transparent pl-0 md:pl-3"
+        aria-label={t("label")}
+        className="mx-auto w-auto gap-2 border-none bg-transparent pl-3 lg:-mx-3 lg:-my-2 lg:pl-3"
       >
         {theme === "light" && <SunIcon />}
         {theme === "dark" && <MoonIcon />}

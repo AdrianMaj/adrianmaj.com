@@ -19,13 +19,13 @@ export async function Footer() {
 
   return (
     <footer className="mt-auto border-t border-border bg-black text-white dark:bg-card">
-      <div className="container flex flex-col gap-8 py-8 md:flex-row md:justify-between">
+      <div className="container flex gap-8 py-8 md:flex-row md:justify-between">
         <Link className="flex items-center" href="/">
           <Logo />
         </Link>
 
-        <div className="flex flex-col-reverse items-start gap-4 md:flex-row md:items-center">
-          <nav className="flex flex-col gap-8 md:flex-row">
+        <div className="ml-auto flex items-center gap-4 md:flex-row">
+          <nav className="flex flex-row items-center gap-4 lg:gap-8">
             {navItems.map(({ link, icon }, i) => {
               return (
                 <CMSLink

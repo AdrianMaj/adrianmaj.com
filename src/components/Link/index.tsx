@@ -48,14 +48,14 @@ export const CMSLink = (props: CMSLinkType) => {
   /* Ensure we don't break any styles set by richText */
   if (appearance === "inline") {
     return (
-      <Link className={cn(className)} href={href || url || ""} {...newTabProps}>
+      <Link className={cn(className, "min-w-6")} href={href || url || ""} {...newTabProps}>
         {icon && icon.url && (
           <Image
             alt={icon.alt}
             src={icon.url}
             width={icon.width ?? 36}
             height={icon.height ?? 36}
-            className="invert"
+            className="min-w-6 invert"
           />
         )}
         {label && label}
@@ -65,15 +65,15 @@ export const CMSLink = (props: CMSLinkType) => {
   }
 
   return (
-    <Button asChild className={className} size={size} variant={appearance}>
-      <Link className={cn(className)} href={href || url || ""} {...newTabProps}>
+    <Button asChild className={cn(className, "min-w-6")} size={size} variant={appearance}>
+      <Link className={cn(className, "min-w-6")} href={href || url || ""} {...newTabProps}>
         {icon && icon.url && (
           <Image
             alt={icon.alt}
             src={icon.url}
             width={icon.width ?? 36}
             height={icon.height ?? 36}
-            className="invert"
+            className="min-w-6 invert"
           />
         )}
         {label && label}

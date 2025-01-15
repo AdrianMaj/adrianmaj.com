@@ -3,11 +3,12 @@ import { Logo } from "@/components/Logo/Logo";
 import { Header } from "@/payload-types";
 import { cn } from "@/utilities/cn";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { CMSLink } from "@/components/Link";
 import { useEffect, useState } from "react";
 import { ThemeSelector } from "@/providers/Theme/ThemeSelector";
 import LocaleSwitch from "@/components/LocaleSwitch/LocaleSwitch";
+import { SearchIcon } from "lucide-react";
 
 export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | null }) => {
   const [isMenuOpened, setisMenuOpened] = useState(false);
@@ -51,16 +52,16 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
   return (
     <header className={classes} style={data.background ? { background: data.background } : {}}>
       <div
-        className={`container flex w-full items-center py-8 ${scrollValue > 0 ? "scrolled" : ""} ${isMenuOpened ? "opened" : ""}`}
+        className={`container flex w-full items-center px-8 py-6 lg:px-4 lg:py-8 ${scrollValue > 0 ? "scrolled" : ""} ${isMenuOpened ? "opened" : ""}`}
       >
-        <Link href="/" className="mr-auto">
+        <Link href="/" className="z-50 mr-auto">
           {data.logo && typeof data.logo !== "string" && data.logo.url && data.logo.alt ? (
             <Image
               src={data.logo.url}
               alt={data.logo.alt}
               width={data.logo.width ?? 256}
               height={data.logo.height ?? 256}
-              className={`${isMenuOpened && "invert lg:invert-0"} -my-7 h-[88px] w-full max-w-[9.375rem]`}
+              className={`${isMenuOpened && "invert lg:invert-0"} z-50 -my-7 h-[88px] w-full max-w-[9.375rem]`}
             />
           ) : (
             <Logo />
@@ -68,23 +69,23 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
         </Link>
         <button
           aria-label="Toggle Menu"
-          className="order-1 ml-8 flex flex-col items-end justify-center gap-[6px] lg:hidden"
+          className="z-50 order-1 ml-8 flex flex-col items-end justify-center gap-[6px] lg:hidden"
           onClick={toggleMenu}
         >
           <div
-            className={`h-[3px] w-7 rounded-full bg-white transition-transform ${isMenuOpened && "absolute top-1/2 -translate-y-1/2 rotate-45 invert"}`}
+            className={`h-[3px] w-7 rounded-full bg-foreground transition-transform ${isMenuOpened && "absolute top-1/2 -translate-y-1/2 rotate-45"}`}
           />
           <div
-            className={`h-[3px] w-[22px] rounded-full bg-white transition-opacity ${isMenuOpened && "opacity-0"}`}
+            className={`h-[3px] w-[22px] rounded-full bg-foreground transition-opacity ${isMenuOpened && "opacity-0"}`}
           />
           <div
-            className={`h-[3px] w-7 rounded-full bg-white transition-transform ${isMenuOpened && "absolute top-1/2 -translate-y-1/2 -rotate-45 invert"}`}
+            className={`h-[3px] w-7 rounded-full bg-foreground transition-transform ${isMenuOpened && "absolute top-1/2 -translate-y-1/2 -rotate-45"}`}
           />
         </button>
         <nav
-          className={`absolute left-1/2 top-0 -z-10 flex origin-bottom transition-opacity duration-300 ${isMenuOpened ? "opacity-100" : "scale-y-0 opacity-0"} z-10 h-dvh w-screen -translate-x-1/2 flex-col items-start justify-between bg-white p-8 pb-16 md:p-12 lg:relative lg:left-0 lg:h-auto lg:w-fit lg:translate-x-0 lg:scale-100 lg:flex-row lg:bg-transparent lg:p-0 lg:opacity-100`}
+          className={`absolute left-1/2 top-0 -z-10 flex origin-bottom transition-opacity duration-300 ${isMenuOpened ? "opacity-100" : "scale-y-0 opacity-0"} z-10 h-dvh w-screen -translate-x-1/2 flex-col items-start justify-between bg-background p-8 pb-16 md:p-12 lg:relative lg:left-0 lg:h-auto lg:w-fit lg:translate-x-0 lg:scale-100 lg:flex-row lg:bg-transparent lg:p-0 lg:opacity-100`}
         >
-          <div className="flex flex-col items-start gap-12 pt-24 lg:flex-row lg:pt-0">
+          <div className="flex h-full w-full flex-col items-start gap-20 pt-32 lg:h-auto lg:flex-row lg:gap-12 lg:pt-0">
             {data.navItems &&
               data.navItems.map(({ link }, i) => {
                 return (
@@ -92,11 +93,11 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
                     key={i}
                     {...link}
                     appearance="link"
-                    className="font-semibold text-background lg:text-base lg:text-foreground"
+                    className="text-3xl font-semibold text-foreground lg:text-base lg:text-foreground"
                   />
                 );
               })}
-            <div className="flex gap-6">
+            <div className="ml-auto mt-auto flex gap-2 lg:mt-0 lg:gap-6">
               <ThemeSelector />
               <LocaleSwitch />
             </div>

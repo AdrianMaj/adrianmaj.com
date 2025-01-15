@@ -16,6 +16,10 @@
     "title": "Search for posts",
     "not-found": "No results found",
     "input-placeholder": "Enter search phrase",
-    "search-button": "Search"
+    "search-button": "Search",
+    "meta-title": "Posts search | adrianmaj.com"
+  },
+  "ThemeSelector": {
+    "label": "Select a theme"
   }
 }

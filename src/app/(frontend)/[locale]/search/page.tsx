@@ -86,8 +86,9 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   );
 }
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("SearchPage");
   return {
-    title: `Payload Website Template Search`,
+    title: t("meta-title"),
   };
 }

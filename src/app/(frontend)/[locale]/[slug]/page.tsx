@@ -52,7 +52,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = "home", locale } = await paramsPromise;
 
   const url = `/${locale}/${slug}`;
-  console.log(slug);
+
 
   let page: PageType | null;
 
