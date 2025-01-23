@@ -46,7 +46,7 @@ export const ImageMedia = (props: MediaProps) => {
     height = fullHeight!;
     alt = altFromResource || "";
 
-    src = `${getClientSideURL()}${url}`;
+    src = `${url}`;
   }
 
   const loading = loadingFromProps || (!priority ? "lazy" : undefined);

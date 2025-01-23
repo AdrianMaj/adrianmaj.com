@@ -5,6 +5,16 @@ import { authenticated } from "@/access/authenticated";
 
 export const Categories: CollectionConfig = {
   slug: "categories",
+  labels: {
+    plural: {
+      en: "Posts Categories",
+      pl: "Kategorie postów",
+    },
+    singular: {
+      en: "Post Category",
+      pl: "Kategoria postów",
+    },
+  },
   access: {
     create: authenticated,
     delete: authenticated,
@@ -13,6 +23,10 @@ export const Categories: CollectionConfig = {
   },
   admin: {
     useAsTitle: "title",
+    group: {
+      en: "Page Settings",
+      pl: "Ustawienia strony",
+    },
   },
   fields: [
     {

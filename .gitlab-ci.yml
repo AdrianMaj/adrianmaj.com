@@ -155,7 +155,7 @@ cleanup_registry_develop:
       --header "PRIVATE-TOKEN: $API_TOKEN"
       --url https://git.pimento.cloud/api/v4/projects/56/registry/repositories/21/tags
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $CI_COMMIT_REF_NAME == "develop"'
 
 # Use the template for the ecommerce cleanup job
 cleanup_registry_ecommerce:
@@ -166,4 +166,4 @@ cleanup_registry_ecommerce:
       --header "PRIVATE-TOKEN: $API_TOKEN"
       --url https://git.pimento.cloud/api/v4/projects/56/registry/repositories/21/tags
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $CI_COMMIT_REF_NAME == "ecommerce"'

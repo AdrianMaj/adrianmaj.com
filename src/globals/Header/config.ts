@@ -9,6 +9,16 @@ export const Header: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    group: {
+      en: "Page Settings",
+      pl: "Ustawienia strony",
+    },
+  },
+  label: {
+    en: "Header",
+    pl: "Nagłówek",
+  },
   fields: [
     {
       name: "navItems",

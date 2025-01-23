@@ -18,6 +18,22 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  labels: {
+    singular: {
+      en: "Media",
+      pl: "Plik",
+    },
+    plural: {
+      en: "Media",
+      pl: "Pliki",
+    },
+  },
+  admin: {
+    group: {
+      en: "Page Settings",
+      pl: "Ustawienia strony",
+    },
+  },
   fields: [
     {
       name: "alt",

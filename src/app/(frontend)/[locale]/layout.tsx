@@ -64,7 +64,7 @@ export default async function RootLayout({
                 preview: isEnabled,
               }}
             /> */}
-            <LivePreviewListener />
+            {isEnabled && <LivePreviewListener />}
 
             <Header />
             {children}

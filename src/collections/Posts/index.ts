@@ -29,6 +29,16 @@ import { slugField } from "@/fields/slug";
 
 export const Posts: CollectionConfig<"posts"> = {
   slug: "posts",
+  labels: {
+    singular: {
+      en: "Post",
+      pl: "Post",
+    },
+    plural: {
+      en: "Posts",
+      pl: "Posty",
+    },
+  },
   access: {
     create: authenticated,
     delete: authenticated,
@@ -64,6 +74,10 @@ export const Posts: CollectionConfig<"posts"> = {
         locale: req.locale,
       }),
     useAsTitle: "title",
+    group: {
+      en: "Page Settings",
+      pl: "Ustawienia strony",
+    },
   },
   fields: [
     {

@@ -48,7 +48,7 @@ type Args = {
 };
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { isEnabled: draft } = await draftMode();
+  // const { isEnabled: draft } = await draftMode();
   const { slug = "home", locale } = await paramsPromise;
 
   const url = `/${locale}/${slug}`;
@@ -73,7 +73,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       {/* Allows redirects for valid pages too */}
       {!page && slug !== "home" && <PayloadRedirects disableNotFound locale={locale} url={url} />}
 
-      {draft && <LivePreviewListener />}
+      {/* {draft && <LivePreviewListener />} */}
 
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
