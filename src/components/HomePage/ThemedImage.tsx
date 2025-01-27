@@ -17,7 +17,7 @@ export const ThemedImage = ({ imageLight, imageDark }: { imageLight: Media; imag
     <Image
       src={imageLight.url ?? ""}
       width={imageLight.width ?? 948}
-      className="min-h-80 w-full object-cover object-left"
+      className="max-h-[700px] min-h-80 w-full object-cover object-left sm:object-contain sm:object-right"
       height={imageLight.height ?? 517}
       priority={true}
       loading="eager"
@@ -30,7 +30,7 @@ export const ThemedImage = ({ imageLight, imageDark }: { imageLight: Media; imag
       height={imageDark.height ?? 517}
       priority={true}
       loading="eager"
-      className="min-h-80 w-full object-cover object-left"
+      className="max-h-[700px] min-h-80 w-full object-cover object-left sm:object-contain sm:object-right"
       alt={t("alt")}
     />
   );

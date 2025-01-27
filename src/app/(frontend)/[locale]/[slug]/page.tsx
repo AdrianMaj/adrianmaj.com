@@ -53,7 +53,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const url = `/${locale}/${slug}`;
 
-
   let page: PageType | null;
 
   page = await queryPageBySlug({
