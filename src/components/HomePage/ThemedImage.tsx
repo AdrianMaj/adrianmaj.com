@@ -1,9 +1,10 @@
 "use client";
+import { Media } from "@/payload-types";
 import { useTheme } from "@/providers/Theme";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export const ThemedImage = () => {
+export const ThemedImage = ({ imageLight, imageDark }: { imageLight: Media; imageDark: Media }) => {
   const { theme } = useTheme();
 
   const t = useTranslations("ThemedImage");
@@ -14,19 +15,19 @@ export const ThemedImage = () => {
 
   return theme === "light" ? (
     <Image
-      src="/api/media/file/welcome-light.jpg"
-      width="948"
+      src={imageLight.url ?? ""}
+      width={imageLight.width ?? 948}
       className="min-h-80 w-full object-cover object-left"
-      height="517"
+      height={imageLight.height ?? 517}
       priority={true}
       loading="eager"
       alt={t("alt")}
     />
   ) : (
     <Image
-      src="/api/media/file/welcome-dark.jpg"
-      width="948"
-      height="517"
+      src={imageDark.url ?? ""}
+      width={imageDark.width ?? 948}
+      height={imageDark.height ?? 517}
       priority={true}
       loading="eager"
       className="min-h-80 w-full object-cover object-left"

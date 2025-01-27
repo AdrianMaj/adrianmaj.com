@@ -2,11 +2,21 @@ import { useTranslations } from "next-intl";
 import PageTemplate, { generateMetadata } from "./[slug]/page";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { getImageProps } from "next/image";
 import { ThemedImage } from "@/components/HomePage/ThemedImage";
+import { getPayload } from "payload";
+import config from "@payload-config";
 
-const HomePage = ({ params }) => {
+const HomePage = async ({ params }) => {
   const t = useTranslations("HomePage");
+  const payload = await getPayload({ config });
+  const imageLight = await payload.findByID({
+    collection: "media",
+    id: "6793fc1ce4ea03f1c753f3ce",
+  });
+  const imageDark = await payload.findByID({
+    collection: "media",
+    id: "6793f61fe4ea03f1c753e5c2",
+  });
 
   return (
     <main>
@@ -23,7 +33,7 @@ const HomePage = ({ params }) => {
             </Button>
           </div>
         </div>
-        <ThemedImage />
+        <ThemedImage imageLight={imageLight} imageDark={imageDark} />
       </section>
       <PageTemplate params={params} />
     </main>
