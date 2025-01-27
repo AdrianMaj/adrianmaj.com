@@ -23,7 +23,7 @@ build:
   script:
     - TIMESTAMP=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
     - FORMATTED_TIMESTAMP=$(echo $TIMESTAMP | sed "s/-//g; s/://g; s/T//g; s/Z//g")
-    - IMAGE_NAME="registry.pimento.cloud/pimento/payload-boilerplate:$CI_COMMIT_REF_SLUG-$FORMATTED_TIMESTAMP-$CI_COMMIT_SHORT_SHA"
+    - IMAGE_NAME="registry.pimento.cloud/pimento/adrian-blog:$CI_COMMIT_REF_SLUG-$FORMATTED_TIMESTAMP-$CI_COMMIT_SHORT_SHA"
     - echo $IMAGE_NAME > image_name.txt
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.pimento.cloud
     - DOCKERFILE_NAME="Dockerfile"
@@ -35,7 +35,6 @@ build:
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master"'
     - if: '$CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE == "push" && $CI_PIPELINE_SOURCE != "schedule"'
-    - if: '$CI_COMMIT_REF_NAME == "ecommerce" && $CI_PIPELINE_SOURCE == "push" && $CI_PIPELINE_SOURCE != "schedule"'
 
 .deploy_common_tasks: &common_tasks
   - 'export IMAGE_NAME=$(cat image_name.txt)'
@@ -60,52 +59,28 @@ build:
     docker run -d --restart always --name $CONTAINER_NAME -e PAYLOAD_SECRET=$PAYLOAD_SECRET -e DATABASE_URI=$DATABASE_URI -e NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL -e S3_BUCKET=$S3_BUCKET -e S3_ENDPOINT=$S3_ENDPOINT -e S3_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID -e S3_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY -p ${BIND_ADDRESS}${BIND_ADDRESS:+:}$DEPLOY_PORT:3000 $IMAGE_NAME"
   - docker logout registry.pimento.cloud
 
-deploy_to_develop:
-  stage: deploy
-  dependencies:
-    - build
-  environment:
-    name: develop
-    url: https://boilerplate.mandala.sh
-  before_script:
-    - export DEPLOY_USER=$DEV_DEPLOY_USER
-    - export SSH_PRIVATE_KEY=$DEV_SSH_KEY
-    - export SSH_KNOWN_HOSTS=$DEV_SSH_KNOWN_HOSTS
-    - export DEPLOY_SERVER=$DEV_SERVER_IP
-    - export DATABASE_URI=$DEV_MONGODB_URI
-    - export NEXT_PUBLIC_SERVER_URL=$DEV_NEXT_PUBLIC_SERVER_URL
-    - export DEPLOY_PORT=3018
-    - export CONTAINER_NAME=boiler-dev-app
-    - export BIND_ADDRESS=""
-    - *common_tasks
-  script:
-    - *script
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE == "push" && $CI_PIPELINE_SOURCE != "schedule"'
-
-deploy_to_ecommerce:
-  stage: deploy
-  dependencies:
-    - build
-  environment:
-    name: ecommerce
-    url: https://ecommerce.mandala.sh
-  before_script:
-    - export DEPLOY_USER=$DEV_DEPLOY_USER
-    - export SSH_PRIVATE_KEY=$DEV_SSH_KEY
-    - export SSH_KNOWN_HOSTS=$DEV_SSH_KNOWN_HOSTS
-    - export DEPLOY_SERVER=$DEV_SERVER_IP
-    - export DATABASE_URI=$ECOM_MONGODB_URI
-    - export NEXT_PUBLIC_SERVER_URL=$ECOM_NEXT_PUBLIC_SERVER_URL
-    - export DEPLOY_PORT=3020
-    - export CONTAINER_NAME=ecom-boiler-app
-    - export BIND_ADDRESS=""
-    - *common_tasks
-  script:
-    - *script
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "ecommerce" && $CI_PIPELINE_SOURCE == "push" && $CI_PIPELINE_SOURCE != "schedule"'
-
+# deploy_to_develop:
+#   stage: deploy
+#   dependencies:
+#     - build
+#   environment:
+#     name: develop
+#     url: https://none
+#   before_script:
+#     - export DEPLOY_USER=$DEV_DEPLOY_USER
+#     - export SSH_PRIVATE_KEY=$DEV_SSH_KEY
+#     - export SSH_KNOWN_HOSTS=$DEV_SSH_KNOWN_HOSTS
+#     - export DEPLOY_SERVER=$DEV_SERVER_IP
+#     - export DATABASE_URI=$DEV_MONGODB_URI
+#     - export NEXT_PUBLIC_SERVER_URL=$DEV_NEXT_PUBLIC_SERVER_URL
+#     - export DEPLOY_PORT=3017
+#     - export CONTAINER_NAME=adrian-blog-app
+#     - export BIND_ADDRESS=""
+#     - *common_tasks
+#   script:
+#     - *script
+#   rules:
+#     - if: '$CI_COMMIT_REF_NAME == "develop" && $CI_PIPELINE_SOURCE == "push" && $CI_PIPELINE_SOURCE != "schedule"'
 
 deploy_to_production:
   stage: deploy
@@ -113,17 +88,17 @@ deploy_to_production:
     - build
   environment:
     name: production
-    url: https://boiler.mandala.sh
+    url: https://adrianmaj.com
   before_script:
-    - export DEPLOY_USER=$PROD_DEPLOY_USER
-    - export SSH_PRIVATE_KEY=$PROD_SSH_KEY
-    - export SSH_KNOWN_HOSTS=$PROD_SSH_KNOWN_HOSTS
-    - export DEPLOY_SERVER=$PROD_SERVER_IP
+    - export DEPLOY_USER=$DEV_DEPLOY_USER
+    - export SSH_PRIVATE_KEY=$DEV_SSH_KEY
+    - export SSH_KNOWN_HOSTS=$DEV_SSH_KNOWN_HOSTS
+    - export DEPLOY_SERVER=$DEV_SERVER_IP
     - export DATABASE_URI=$PROD_MONGODB_URI
     - export NEXT_PUBLIC_SERVER_URL=$PROD_NEXT_PUBLIC_SERVER_URL
-    - export DEPLOY_PORT=3011
-    - export CONTAINER_NAME=boiler-prod-app
-    - export BIND_ADDRESS="127.0.0.1"
+    - export DEPLOY_PORT=3099
+    - export CONTAINER_NAME=adrian-blog-app
+    - export BIND_ADDRESS=""
     - *common_tasks
   script:
     - *script
@@ -142,7 +117,7 @@ cleanup_master_images:
     - >
       curl --request DELETE --data "name_regex_delete=^master-.*" --data "keep_n=2"
       --header "PRIVATE-TOKEN: $API_TOKEN"
-      --url https://git.pimento.cloud/api/v4/projects/56/registry/repositories/21/tags
+      --url https://git.pimento.cloud/api/v4/projects/59/registry/repositories/19/tags
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master"'
 
@@ -153,17 +128,6 @@ cleanup_registry_develop:
     - >
       curl --request DELETE --data "name_regex_delete=^develop-.*" --data "keep_n=2"
       --header "PRIVATE-TOKEN: $API_TOKEN"
-      --url https://git.pimento.cloud/api/v4/projects/56/registry/repositories/21/tags
+      --url https://git.pimento.cloud/api/v4/projects/59/registry/repositories/19/tags
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule" && $CI_COMMIT_REF_NAME == "develop"'
-
-# Use the template for the ecommerce cleanup job
-cleanup_registry_ecommerce:
-  <<: *cleanup_job_definition
-  script:
-    - >
-      curl --request DELETE --data "name_regex_delete=^ecommerce-.*" --data "keep_n=2"
-      --header "PRIVATE-TOKEN: $API_TOKEN"
-      --url https://git.pimento.cloud/api/v4/projects/56/registry/repositories/21/tags
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule" && $CI_COMMIT_REF_NAME == "ecommerce"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
