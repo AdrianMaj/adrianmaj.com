@@ -5,12 +5,15 @@ import type { Post } from "@/payload-types";
 import { Media } from "@/components/Media";
 import { formatAuthors } from "@/utilities/formatAuthors";
 import { Fragment } from "react";
+import { useTranslations } from "next-intl";
 
 export const PostHero = ({ post }: { post: Post }) => {
   const { categories, heroImage, populatedAuthors, publishedAt, title } = post;
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== "";
+
+  const t = useTranslations("PostHero");
 
   return (
     <div className="relative -mt-[10.4rem] flex items-end">
@@ -44,7 +47,7 @@ export const PostHero = ({ post }: { post: Post }) => {
             {hasAuthors && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm">Author</p>
+                  <p className="text-sm">{t("author")}</p>
 
                   <p>{formatAuthors(populatedAuthors)}</p>
                 </div>
@@ -52,7 +55,7 @@ export const PostHero = ({ post }: { post: Post }) => {
             )}
             {publishedAt && (
               <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
+                <p className="text-sm">{t("date")}</p>
 
                 <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
               </div>
