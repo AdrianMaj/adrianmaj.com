@@ -1,13 +1,11 @@
 import { HeaderClient } from "./Component.client";
-import { getCachedGlobal } from "@/utilities/getGlobals";
+import { getGlobal } from "@/utilities/getGlobals";
 
 import type { Header } from "@/payload-types";
-import { getLocale } from "next-intl/server";
 import { Locale } from "@/i18n/config";
 
-export async function Header() {
-  const locale = (await getLocale()) as Locale;
-  const headerData: Header = await getCachedGlobal("header", locale, 1)();
+export async function Header({ locale }: { locale: Locale }) {
+  const headerData: Header = await getGlobal("header", 1, locale);
 
   return <HeaderClient data={headerData} />;
 }
