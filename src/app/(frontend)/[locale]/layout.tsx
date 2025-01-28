@@ -64,7 +64,7 @@ export default async function RootLayout({
             /> */}
             {isEnabled && <LivePreviewListener />}
 
-            <Header />
+            <Header locale={locale as Locale} />
             {children}
             <Footer />
           </NextIntlClientProvider>
