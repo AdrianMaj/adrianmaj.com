@@ -95,6 +95,7 @@ export const Posts: CollectionConfig<"posts"> = {
               name: "heroImage",
               type: "upload",
               relationTo: "media",
+              localized: true,
             },
             {
               name: "content",
