@@ -1,5 +1,10 @@
 import { Config } from "payload";
-import { LinkFeature, lexicalEditor, BlocksFeature } from "@payloadcms/richtext-lexical";
+import {
+  LinkFeature,
+  lexicalEditor,
+  BlocksFeature,
+  InlineToolbarFeature,
+} from "@payloadcms/richtext-lexical";
 // import {
 //   BgColorFeature,
 //   HighlightColorFeature,
@@ -8,6 +13,8 @@ import { LinkFeature, lexicalEditor, BlocksFeature } from "@payloadcms/richtext-
 //   VimeoFeature,
 // } from "payloadcms-lexical-ext";
 import { Carousel } from "@/blocks/Carousel/config";
+import { InlineBlockContainer } from "@payloadcms/richtext-lexical/client";
+import { MediaBlock } from "@/blocks/MediaBlock/config";
 
 export const defaultLexical: Config["editor"] = lexicalEditor({
   features: ({ defaultFeatures }) => {
@@ -15,7 +22,9 @@ export const defaultLexical: Config["editor"] = lexicalEditor({
       ...defaultFeatures,
       BlocksFeature({
         blocks: [Carousel],
+        inlineBlocks: [MediaBlock],
       }),
+      InlineToolbarFeature(),
       LinkFeature({
         enabledCollections: ["pages", "posts"],
         fields: ({ defaultFields }) => {
