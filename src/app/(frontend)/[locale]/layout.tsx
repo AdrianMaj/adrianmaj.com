@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { cn } from "src/utilities/cn";
 import { GeistMono } from "geist/font/mono";
@@ -70,6 +71,7 @@ export default async function RootLayout({
           </NextIntlClientProvider>
         </Providers>
       </body>
+      <GoogleAnalytics gaId="G-B5V1SM5LXF" />
     </html>
   );
 }
