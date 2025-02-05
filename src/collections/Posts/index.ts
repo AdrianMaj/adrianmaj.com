@@ -7,6 +7,7 @@ import {
   HorizontalRuleFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  TreeViewFeature,
 } from "@payloadcms/richtext-lexical";
 
 import { authenticated } from "@/access/authenticated";
