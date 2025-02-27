@@ -33,6 +33,7 @@ export const ArchiveBlock = async (
       collection: "posts",
       depth: 1,
       locale,
+      overrideAccess: false,
       limit,
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
