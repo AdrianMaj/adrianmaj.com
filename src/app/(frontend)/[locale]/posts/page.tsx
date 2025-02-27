@@ -7,9 +7,8 @@ import config from "@payload-config";
 import { getPayload } from "payload";
 import React from "react";
 import PageClient from "./page.client";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Locale } from "@/i18n/config";
-
 export const dynamic = "force-static";
 export const revalidate = 600;
 
@@ -31,12 +30,14 @@ export default async function Page() {
     },
   });
 
+  const t = await getTranslations("Posts");
+
   return (
     <div className="pb-24 pt-24">
       <PageClient />
       <div className="container mb-16">
         <div className="prose max-w-none dark:prose-invert">
-          <h1>Posts</h1>
+          <h1>{t("title")}</h1>
         </div>
       </div>
 
@@ -53,8 +54,15 @@ export default async function Page() {
   );
 }
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations({ namespace: "Posts", locale });
   return {
-    title: `Payload Website Template Posts`,
+    title: t("meta-title"),
+    description: t("meta-description"),
+    openGraph: {
+      description: t("meta-description"),
+      images: [{ url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/media/file/meta-og.webp` }],
+    },
   };
 }

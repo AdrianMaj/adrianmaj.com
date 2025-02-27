@@ -23,6 +23,11 @@
   "ThemeSelector": {
     "label": "Wybierz motyw"
   },
+  "Posts": {
+    "title": "Wszystkie wpisy",
+    "meta-title": "Blog | Adrian Maj - Full-stack Developer | adrianmaj.com",
+    "meta-description": "Artykuły i tutoriale o Next.js oraz PayloadCMS i nie tylko. Poznaj praktyczne porady, najlepsze praktyki i rozwiązania problemów."
+  },
   "PostHero": {
     "author": "Autor",
     "date": "Data opublikowania"

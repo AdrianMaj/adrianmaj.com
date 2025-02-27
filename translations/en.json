@@ -23,6 +23,11 @@
   "ThemeSelector": {
     "label": "Select a theme"
   },
+  "Posts": {
+    "title": "All blog posts",
+    "meta-title": "Blog | Adrian Maj - Full-stack Developer | adrianmaj.com",
+    "meta-description": "Full-stack development articles and tutorials with Next.js and PayloadCMS. Discover practical tips, best practices and problem-solving solutions."
+  },
   "PostHero": {
     "author": "Author",
     "date": "Date published"
