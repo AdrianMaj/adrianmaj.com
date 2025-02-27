@@ -90,6 +90,7 @@ export const DefaultHeader = ({ data, theme }: { data: Header; theme: string | n
               data.navItems.map(({ link }, i) => {
                 return (
                   <CMSLink
+                    onClick={toggleMenu}
                     key={i}
                     {...link}
                     appearance="link"

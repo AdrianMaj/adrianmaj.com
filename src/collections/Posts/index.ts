@@ -7,6 +7,7 @@ import {
   HorizontalRuleFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  TreeViewFeature,
 } from "@payloadcms/richtext-lexical";
 
 import { authenticated } from "@/access/authenticated";
@@ -95,6 +96,7 @@ export const Posts: CollectionConfig<"posts"> = {
               name: "heroImage",
               type: "upload",
               relationTo: "media",
+              localized: true,
             },
             {
               name: "content",
@@ -104,7 +106,7 @@ export const Posts: CollectionConfig<"posts"> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                    BlocksFeature({ blocks: [Banner, Code, MediaBlock], inlineBlocks: [MediaBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
@@ -243,6 +245,7 @@ export const Posts: CollectionConfig<"posts"> = {
       autosave: {
         interval: 100, // We set this interval for optimal live preview
       },
+      schedulePublish: true,
     },
     maxPerDoc: 50,
   },

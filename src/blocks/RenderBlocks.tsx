@@ -27,6 +27,7 @@ export const RenderBlocks = ({ blocks }: { blocks: Page["layout"][0][] }) => {
     return (
       <>
         {blocks.map((block, index) => {
+          console.log(block);
           const { blockType } = block;
 
           if (blockType && blockType in blockComponents) {

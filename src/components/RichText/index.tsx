@@ -20,6 +20,7 @@ import { cn } from "@/utilities/cn";
 
 // import { JSXConverters } from "payloadcms-lexical-ext";
 import { CarouselBlock } from "@/blocks/Carousel/Component";
+import { Media } from "../Media";
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -38,6 +39,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
   // ...JSXConverters,
+  inlineBlocks: {
+    mediaBlock: ({ node }) => <Media resource={node.fields.media} src={node.fields.staticImage} />,
+  },
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (

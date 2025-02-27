@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { cn } from "src/utilities/cn";
 import { GeistMono } from "geist/font/mono";
@@ -53,8 +54,6 @@ export default async function RootLayout({
     >
       <head>
         <InitTheme />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body className="max-w-screen overflow-x-clip lg:overflow-y-auto">
         <Providers>
@@ -66,12 +65,13 @@ export default async function RootLayout({
             /> */}
             {isEnabled && <LivePreviewListener />}
 
-            <Header />
+            <Header locale={locale as Locale} />
             {children}
             <Footer />
           </NextIntlClientProvider>
         </Providers>
       </body>
+      <GoogleAnalytics gaId="G-B5V1SM5LXF" />
     </html>
   );
 }
@@ -81,6 +81,6 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: "summary_large_image",
-    creator: "@payloadcms",
+    creator: "@adrianmaj1122",
   },
 };
