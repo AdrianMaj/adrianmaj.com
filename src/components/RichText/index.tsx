@@ -18,9 +18,9 @@ import { BannerBlock } from "@/blocks/Banner/Component";
 import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { cn } from "@/utilities/cn";
 
-// import { JSXConverters } from "payloadcms-lexical-ext";
 import { CarouselBlock } from "@/blocks/Carousel/Component";
 import { Media } from "../Media";
+import { TypographyJSXConverters } from "payload-lexical-typography/converters";
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -38,7 +38,7 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
-  // ...JSXConverters,
+  ...TypographyJSXConverters,
   inlineBlocks: {
     mediaBlock: ({ node }) => <Media resource={node.fields.media} src={node.fields.staticImage} />,
   },

@@ -5,7 +5,7 @@ import { PayloadRedirects } from "@/components/PayloadRedirects";
 import config from "@payload-config";
 import { getPayload } from "payload";
 import { draftMode } from "next/headers";
-import React, { cache } from "react";
+import { unstable_cache } from "next/cache";
 import RichText from "@/components/RichText";
 
 import type { Post } from "@/payload-types";
@@ -87,24 +87,30 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: post });
 }
 
-const queryPostBySlug = cache(async ({ slug, locale }: { slug: string; locale: Locale }) => {
-  const { isEnabled: draft } = await draftMode();
+const queryPostBySlug = unstable_cache(
+  async ({ slug, locale }: { slug: string; locale: Locale }) => {
+    const { isEnabled: draft } = await draftMode();
 
-  const payload = await getPayload({ config });
+    const payload = await getPayload({ config });
 
-  const result = await payload.find({
-    collection: "posts",
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    pagination: false,
-    locale,
-    where: {
-      slug: {
-        equals: slug,
+    const result = await payload.find({
+      collection: "posts",
+      draft,
+      limit: 1,
+      overrideAccess: draft,
+      pagination: false,
+      locale,
+      where: {
+        slug: {
+          equals: slug,
+        },
       },
-    },
-  });
+    });
 
-  return result.docs?.[0] || null;
-});
+    return result.docs?.[0] || null;
+  },
+  ["post-by-slug"],
+  {
+    tags: ["posts-content", "pages-content"],
+  },
+);

@@ -28,6 +28,14 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import { slugField } from "@/fields/slug";
 
+import {
+  TextColorFeature,
+  TextSizeFeature,
+  TextLetterSpacingFeature,
+  TextLineHeightFeature,
+  TextFontFamilyFeature,
+} from "payload-lexical-typography";
+
 export const Posts: CollectionConfig<"posts"> = {
   slug: "posts",
   labels: {
@@ -110,6 +118,11 @@ export const Posts: CollectionConfig<"posts"> = {
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
+                    TextColorFeature(),
+                    TextSizeFeature(),
+                    TextLetterSpacingFeature(),
+                    TextLineHeightFeature(),
+                    TextFontFamilyFeature(),
                   ];
                 },
               }),

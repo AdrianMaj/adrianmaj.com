@@ -5,23 +5,20 @@ import {
   BlocksFeature,
   InlineToolbarFeature,
 } from "@payloadcms/richtext-lexical";
-// import {
-//   BgColorFeature,
-//   HighlightColorFeature,
-//   TextColorFeature,
-//   YoutubeFeature,
-//   VimeoFeature,
-// } from "payloadcms-lexical-ext";
-import { Carousel } from "@/blocks/Carousel/config";
-import { InlineBlockContainer } from "@payloadcms/richtext-lexical/client";
 import { MediaBlock } from "@/blocks/MediaBlock/config";
+import {
+  TextColorFeature,
+  TextSizeFeature,
+  TextLetterSpacingFeature,
+  TextLineHeightFeature,
+  TextFontFamilyFeature,
+} from "payload-lexical-typography";
 
 export const defaultLexical: Config["editor"] = lexicalEditor({
   features: ({ defaultFeatures }) => {
     return [
       ...defaultFeatures,
       BlocksFeature({
-        blocks: [Carousel],
         inlineBlocks: [MediaBlock],
       }),
       InlineToolbarFeature(),
@@ -47,12 +44,11 @@ export const defaultLexical: Config["editor"] = lexicalEditor({
           ];
         },
       }),
-      // TextColorFeature(),
-      // HighlightColorFeature(),
-      // BgColorFeature(),
-
-      //   YoutubeFeature(),
-      //   VimeoFeature(),
+      TextColorFeature(),
+      TextSizeFeature(),
+      TextLetterSpacingFeature(),
+      TextLineHeightFeature(),
+      TextFontFamilyFeature(),
     ];
   },
 });

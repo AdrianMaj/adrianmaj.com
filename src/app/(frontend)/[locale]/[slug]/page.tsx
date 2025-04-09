@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import config from "@payload-config";
 import { getPayload } from "payload";
-import { draftMode } from "next/headers";
-import React, { cache } from "react";
 import { Locale } from "@/i18n/config";
 
 import type { Page as PageType } from "@/payload-types";
@@ -13,8 +11,8 @@ import { RenderBlocks } from "@/blocks/RenderBlocks";
 import { RenderHero } from "@/components/heros/RenderHero";
 import { generateMeta } from "@/utilities/generateMeta";
 import PageClient from "./page.client";
-import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { routing } from "@/i18n/routing";
+import { unstable_cache } from "next/cache";
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config });
@@ -90,24 +88,28 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: page });
 }
 
-const queryPageBySlug = cache(async ({ slug, locale }: { slug: string; locale: Locale }) => {
-  const { isEnabled: draft } = await draftMode();
+const queryPageBySlug = unstable_cache(
+  async ({ slug, locale, draft }: { slug: string; locale: Locale; draft?: boolean }) => {
+    const payload = await getPayload({ config });
 
-  const payload = await getPayload({ config });
-
-  const result = await payload.find({
-    collection: "pages",
-    draft,
-    limit: 1,
-    locale,
-    pagination: false,
-    overrideAccess: draft,
-    where: {
-      slug: {
-        equals: slug,
+    const result = await payload.find({
+      collection: "pages",
+      draft,
+      limit: 1,
+      locale,
+      pagination: false,
+      overrideAccess: draft,
+      where: {
+        slug: {
+          equals: slug,
+        },
       },
-    },
-  });
+    });
 
-  return result.docs?.[0] || null;
-});
+    return result.docs?.[0] || null;
+  },
+  ["page-by-slug"],
+  {
+    tags: ["pages-content", "posts-content"],
+  },
+);
